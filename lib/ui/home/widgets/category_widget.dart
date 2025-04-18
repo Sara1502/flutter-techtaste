@@ -14,10 +14,22 @@ class CategoryWidget extends StatelessWidget {
         color: AppColors.lightBackgroudColor,
         borderRadius: BorderRadius.circular(12.0),
       ),
-      child: Column(mainAxisSize: MainAxisSize.min, children: [
-        Image.asset("assets/categories/$category.png", width: 64),
-        Text(category),
-      ],),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        spacing: 8.0,
+        children: [
+          Image.asset(
+            "assets/categories/${category.toLowerCase()}.png",
+            height: 48,
+          ),
+          Text(
+            category,
+            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 }
