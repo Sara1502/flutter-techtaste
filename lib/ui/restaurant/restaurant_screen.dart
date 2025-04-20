@@ -1,8 +1,9 @@
-import 'dart:nativewrappers/_internal/vm/lib/ffi_patch.dart';
-
 import 'package:flutter/material.dart';
 import 'package:myapp/model/restaurant.dart';
 import 'package:myapp/model/dish.dart';
+import 'package:myapp/ui/_core/bag_provider.dart';
+import 'package:myapp/ui/_core/widgets/appbar.dart';
+import 'package:provider/provider.dart';
 
 class RestaurantScreen extends StatelessWidget {
   final Restaurant restaurant;
@@ -11,7 +12,7 @@ class RestaurantScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(restaurant.name)),
+      appBar: getAppBar(context: context, title: restaurant.name),
       body: Center(
         child: Column(
           spacing: 12.0,
@@ -30,7 +31,12 @@ class RestaurantScreen extends StatelessWidget {
                   leading: Image.asset('assets/dishes/default.png', width: 48),
                   title: Text(dish.name),
                   subtitle: Text("R\$${dish.price.toStringAsFixed(2)}"),
-                  trailing: IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+                  trailing: IconButton(
+                    onPressed: () {
+                      context.read<BagProvider>().addAllDishes([dish]);
+                    },
+                    icon: Icon(Icons.add),
+                  ),
                 );
               }),
             ),
